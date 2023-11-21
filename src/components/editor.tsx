@@ -2,6 +2,10 @@
 import React, { useState } from "react";
 import { Editable, Slate, withReact } from "slate-react";
 import { createEditor } from "slate";
+import {
+  renderElement,
+  renderLeaf,
+} from "@/components/slate-plugins/element-render";
 
 const initialValue = [
   {
@@ -13,8 +17,8 @@ const initialValue = [
 function Editor(props) {
   const [editor] = useState(() => withReact(createEditor()));
   return (
-    <Slate editor={editor} value initialValue={initialValue}>
-      <Editable />
+    <Slate editor={editor} initialValue={initialValue}>
+      <Editable renderElement={renderElement} renderLeaf={renderLeaf} />
     </Slate>
   );
 }
