@@ -1,5 +1,6 @@
 import { Editor, Element, Transforms } from "slate";
 import { CustomText } from "@/components/slate-plugins/custom-types";
+import { MARK_BOLD, MARK_CODE } from "@/components/slate-plugins/constants";
 
 export const keydownEventPlugin = (event: any, editor: any) => {
   if (!event.ctrlKey) return;
@@ -26,7 +27,7 @@ export const CustomEditor = {
 
   isCodeBlockActive(editor: any) {
     const [match]: any = Editor.nodes(editor, {
-      match: (n: any) => Element?.isElement(n) && n.type === "code-block",
+      match: (n: any) => Element?.isElement(n) && n.type === MARK_CODE,
     });
     return !!match;
   },
@@ -34,9 +35,9 @@ export const CustomEditor = {
   toggleBoldMark(editor: any) {
     const isActive = CustomEditor.isBoldMarkActive(editor);
     if (isActive) {
-      Editor.removeMark(editor, "bold");
+      Editor.removeMark(editor, MARK_BOLD);
     } else {
-      Editor.addMark(editor, "bold", true);
+      Editor.addMark(editor, MARK_BOLD, true);
     }
   },
 
@@ -44,7 +45,7 @@ export const CustomEditor = {
     const isActive = CustomEditor.isCodeBlockActive(editor);
     Transforms.setNodes(
       editor,
-      { type: isActive ? undefined : "code-block" },
+      { type: isActive ? undefined : MARK_CODE },
       { match: (n) => Element?.isElement(n) && Editor.isBlock(editor, n) },
     );
   },

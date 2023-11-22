@@ -1,90 +1,119 @@
 import { Descendant, BaseEditor, BaseRange, Range, Element } from "slate";
 import { ReactEditor } from "slate-react";
 import { HistoryEditor } from "slate-history";
+import {
+  BADGE,
+  BLOCK_HEADING_ONE,
+  BLOCK_HEADING_THREE,
+  BLOCK_HEADING_TWO,
+  BLOCK_PARAGRAPH,
+  BLOCK_QUOTE,
+  BULLETED_LIST,
+  BUTTON,
+  CHECK_LIST_ITEM,
+  CODE_LINE,
+  EDITABLE_VOID,
+  IMAGE,
+  LINK,
+  LIST_ITEM,
+  MARK_CODE,
+  MENTION,
+  TABLE,
+  TABLE_CELL,
+  TABLE_ROW,
+  TITLE,
+  VIDEO,
+} from "@/components/slate-plugins/constants";
 
 export type BlockQuoteElement = {
-  type: "block-quote";
+  type: BLOCK_QUOTE;
   align?: string;
   children: Descendant[];
 };
 
 export type BulletedListElement = {
-  type: "bulleted-list";
+  type: BULLETED_LIST;
   align?: string;
   children: Descendant[];
 };
 
 export type CheckListItemElement = {
-  type: "check-list-item";
+  type: CHECK_LIST_ITEM;
   checked: boolean;
   children: Descendant[];
 };
 
 export type EditableVoidElement = {
-  type: "editable-void";
+  type: EDITABLE_VOID;
   children: EmptyText[];
 };
 
 export type HeadingElement = {
-  type: "heading";
+  type: BLOCK_HEADING_ONE;
   align?: string;
   children: Descendant[];
 };
 
 export type HeadingTwoElement = {
-  type: "heading-two";
+  type: BLOCK_HEADING_TWO;
+  align?: string;
+  children: Descendant[];
+};
+
+export type HeadingThreeElement = {
+  type: BLOCK_HEADING_THREE;
   align?: string;
   children: Descendant[];
 };
 
 export type ImageElement = {
-  type: "image";
+  type: IMAGE;
   url: string;
   children: EmptyText[];
 };
 
-export type LinkElement = { type: "link"; url: string; children: Descendant[] };
+export type LinkElement = { type: LINK; url: string; children: Descendant[] };
 
-export type ButtonElement = { type: "button"; children: Descendant[] };
+export type ButtonElement = { type: BUTTON; children: Descendant[] };
 
-export type BadgeElement = { type: "badge"; children: Descendant[] };
+export type BadgeElement = { type: BADGE; children: Descendant[] };
 
-export type ListItemElement = { type: "list-item"; children: Descendant[] };
+export type ListItemElement = { type: LIST_ITEM; children: Descendant[] };
 
 export type MentionElement = {
-  type: "mention";
+  type: MENTION;
   character: string;
   children: CustomText[];
 };
 
 export type ParagraphElement = {
-  type: "paragraph";
+  type: BLOCK_PARAGRAPH;
   align?: string;
   children: Descendant[];
 };
 
-export type TableElement = { type: "table"; children: TableRow[] };
+export type TableElement = { type: TABLE; children: TableRow[] };
 
-export type TableCellElement = { type: "table-cell"; children: CustomText[] };
+export type TableCellElement = { type: TABLE_CELL; children: CustomText[] };
 
-export type TableRowElement = { type: "table-row"; children: TableCell[] };
+export type TableRowElement = { type: TABLE_ROW; children: TableCell[] };
 
-export type TitleElement = { type: "title"; children: Descendant[] };
+export type TitleElement = { type: TITLE; children: Descendant[] };
 
 export type VideoElement = {
-  type: "video";
+  type: VIDEO;
   url: string;
   children: EmptyText[];
 };
 
 export type CodeBlockElement = {
-  type: "code-block";
+  type: MARK_CODE;
   language: string;
   children: Descendant[];
 };
 
 export type CodeLineElement = {
-  type: "code-line";
+  type: CODE_LINE;
   children: Descendant[];
 };
 
@@ -95,6 +124,7 @@ type CustomElement =
   | EditableVoidElement
   | HeadingElement
   | HeadingTwoElement
+  | HeadingThreeElement
   | ImageElement
   | LinkElement
   | ButtonElement
