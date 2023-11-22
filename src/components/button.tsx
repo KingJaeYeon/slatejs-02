@@ -13,7 +13,7 @@ export const Button = ({
   onclickHandler,
 }: ButtonProps) => {
   return (
-    <button className={cn("", className)} onClick={() => onclickHandler}>
+    <button className={cn("", className)} onClick={onclickHandler}>
       {children}
     </button>
   );
