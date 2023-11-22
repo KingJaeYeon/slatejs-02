@@ -1,17 +1,21 @@
 import { Editor, Element, Transforms } from "slate";
 import { CustomText } from "@/components/slate-plugins/custom-types";
 import { MARK_BOLD, MARK_CODE } from "@/components/slate-plugins/constants";
+import {
+  MARK_BOLD_HOTKEY,
+  MARK_CODE_HOTKEY,
+} from "@/components/slate-plugins/constants-hotkey";
 
 export const keydownEventPlugin = (event: any, editor: any) => {
   if (!event.ctrlKey) return;
 
   switch (event.key) {
-    case "`": {
+    case MARK_CODE_HOTKEY: {
       event.preventDefault();
       CustomEditor.toggleCodeBlock(editor);
       break;
     }
-    case "b": {
+    case MARK_BOLD_HOTKEY: {
       event.preventDefault();
       CustomEditor.toggleBoldMark(editor);
       break;
