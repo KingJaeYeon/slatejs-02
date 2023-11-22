@@ -4,16 +4,22 @@ import { cn } from "@/lib/utils";
 
 type ButtonProps = {
   className?: string;
+  title?: string;
   children?: React.ReactNode;
   onclickHandler?: () => void;
 };
 export const Button = ({
   className,
+  title,
   children,
   onclickHandler,
 }: ButtonProps) => {
   return (
-    <button className={cn("", className)} onClick={onclickHandler}>
+    <button
+      title={title}
+      className={cn("", className)}
+      onClick={onclickHandler}
+    >
       {children}
     </button>
   );
