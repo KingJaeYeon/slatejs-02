@@ -1,11 +1,13 @@
 "use client";
-import React, { useState } from "react";
-import { Editable, Slate, withReact } from "slate-react";
-import { createEditor, Descendant } from "slate";
+import React from "react";
+import { Editable, Slate } from "slate-react";
+import { Descendant } from "slate";
 import {
   renderElement,
   renderLeaf,
 } from "@/components/slate-plugins/element-render";
+import { useEditorStore } from "@/store/editorStore";
+import { keydownEventPlugin } from "@/components/slate-plugins/custom-editor";
 
 const initialValue: Descendant[] = [
   {
@@ -15,10 +17,17 @@ const initialValue: Descendant[] = [
 ];
 
 function Editor(props: any) {
-  const [editor] = useState(() => withReact(createEditor()));
+  const { editor } = useEditorStore((state) => state);
+
   return (
     <Slate editor={editor} initialValue={initialValue}>
-      <Editable renderElement={renderElement} renderLeaf={renderLeaf} />
+      <Editable
+        renderElement={renderElement}
+        renderLeaf={renderLeaf}
+        onKeyDown={(event) => {
+          keydownEventPlugin(event, editor);
+        }}
+      />
     </Slate>
   );
 }
