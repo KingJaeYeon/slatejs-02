@@ -26,6 +26,22 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
+          CustomEditor.toggleUnderlineMark(editor);
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        U
+      </Button>
+      <Button
+        onclickHandler={() => {
+          CustomEditor.toggleItalicMark(editor);
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        I
+      </Button>
+      <Button
+        onclickHandler={() => {
           CustomEditor.toggleHeaderOneBlock(editor);
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
