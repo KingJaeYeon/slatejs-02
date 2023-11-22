@@ -12,6 +12,8 @@ import {
 import {
   MARK_BOLD_HOTKEY,
   MARK_CODE_HOTKEY,
+  MARK_ITALIC_HOTKEY,
+  MARK_UNDERLINE_HOTKEY,
 } from "@/components/slate-plugins/constants-hotkey";
 
 export const keydownEventPlugin = (event: any, editor: any) => {
@@ -26,6 +28,16 @@ export const keydownEventPlugin = (event: any, editor: any) => {
     case MARK_BOLD_HOTKEY: {
       event.preventDefault();
       CustomEditor.toggleBoldMark(editor);
+      break;
+    }
+    case MARK_UNDERLINE_HOTKEY: {
+      event.preventDefault();
+      CustomEditor.toggleUnderlineMark(editor);
+      break;
+    }
+    case MARK_ITALIC_HOTKEY: {
+      event.preventDefault();
+      CustomEditor.toggleItalicMark(editor);
       break;
     }
   }
