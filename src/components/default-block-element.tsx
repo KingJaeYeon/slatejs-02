@@ -1,4 +1,4 @@
 "use client";
-export const DefaultElement = (props) => {
+export const DefaultElement = (props: any) => {
   return <p {...props.attributes}>{props.children}</p>;
 };

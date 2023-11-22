@@ -1,7 +1,7 @@
 "use client";
 
 // Define a React component to render leaves with bold text.
-export const Leaf = (props) => {
+export const Leaf = (props: any) => {
   return (
     <span
       {...props.attributes}
