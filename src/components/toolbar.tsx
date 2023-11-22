@@ -9,6 +9,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
   return (
     <div className={"flex"}>
       <Button
+        title={"ctrl+b"}
         onclickHandler={() => {
           CustomEditor.toggleBoldMark(editor);
         }}
