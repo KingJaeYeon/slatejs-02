@@ -8,10 +8,11 @@ import {
 } from "@/components/slate-plugins/element-render";
 import { useEditorStore } from "@/store/editorStore";
 import { keydownEventPlugin } from "@/components/slate-plugins/custom-editor";
+import { BLOCK_PARAGRAPH } from "@/components/slate-plugins/constants";
 
 const initialValue: Descendant[] = [
   {
-    type: "paragraph",
+    type: BLOCK_PARAGRAPH,
     children: [{ text: "A line of text in a paragraph." }],
   },
 ];
