@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { withReact } from "slate-react";
 import { createEditor } from "slate";
-import { withHistory } from "@/components/slate-plugins/with-history";
+import { withHistory } from "@/components/slate-plugins/history/with-history";
 
 type State = {
   editor: any;
