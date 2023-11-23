@@ -1,6 +1,9 @@
 "use client";
 import { Button } from "@/components/button";
-import { CustomEditor } from "@/components/slate-plugins/custom-editor";
+import {
+  CustomEditor,
+  MarkEditor,
+} from "@/components/slate-plugins/custom-editor";
 import { useEditorStore } from "@/store/editorStore";
 
 export const Toolbar = ({ show }: { show: boolean }) => {
@@ -11,7 +14,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       <Button
         title={"ctrl+b"}
         onclickHandler={() => {
-          CustomEditor.toggleBoldMark(editor);
+          MarkEditor.toggleMark(editor, "bold");
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
@@ -27,7 +30,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
-          CustomEditor.toggleUnderlineMark(editor);
+          MarkEditor.toggleMark(editor, "underline");
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
@@ -35,7 +38,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
-          CustomEditor.toggleItalicMark(editor);
+          MarkEditor.toggleMark(editor, "italic");
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >

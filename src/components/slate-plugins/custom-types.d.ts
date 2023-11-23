@@ -16,7 +16,10 @@ import {
   IMAGE,
   LINK,
   LIST_ITEM,
+  MARK_BOLD,
   MARK_CODE,
+  MARK_ITALIC,
+  MARK_UNDERLINE,
   MENTION,
   TABLE,
   TABLE_CELL,
@@ -146,6 +149,10 @@ export type CustomText = {
   underline?: boolean;
   text?: string;
 };
+export type MarkFormat =
+  | typeof MARK_BOLD
+  | typeof MARK_ITALIC
+  | typeof MARK_UNDERLINE;
 
 export type EmptyText = {
   text: string;

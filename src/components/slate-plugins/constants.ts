@@ -16,9 +16,6 @@ export const LINK = "link";
 export const BUTTON = "button";
 export const BADGE = "badge";
 export const LINE_HEIGHT = "line-height";
-export const TEXT_ALIGN_LEFT = "align_left";
-export const TEXT_ALIGN_CENTER = "align_center";
-export const TEXT_ALIGN_RIGHT = "align_right";
 export const EMOJI_SMAIL = "smail";
 export const BULLETED_LIST = "bulleted-list";
 export const CHECK_LIST_ITEM = "check-list-item";
@@ -35,3 +32,15 @@ export const TABLE_CELL = "table-cell";
 export const TITLE = "title";
 export const TABLE_ROW = "table-row";
 export const LIST_ITEM = "list-item";
+
+export const TYPE = "type";
+export const ALIGN = "align";
+
+export const TEXT_ALIGN_LEFT = "align_left";
+export const TEXT_ALIGN_CENTER = "align_center";
+export const TEXT_ALIGN_RIGHT = "align_right";
+export const TEXT_ALIGN_TYPES = [
+  TEXT_ALIGN_LEFT,
+  TEXT_ALIGN_CENTER,
+  TEXT_ALIGN_RIGHT,
+];
