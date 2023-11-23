@@ -17,7 +17,7 @@ import {
   LINK,
   LIST_ITEM,
   MARK_BOLD,
-  MARK_CODE,
+  BLOCK_CODE,
   MARK_ITALIC,
   MARK_UNDERLINE,
   MENTION,
@@ -110,7 +110,7 @@ export type VideoElement = {
 };
 
 export type CodeBlockElement = {
-  type: MARK_CODE;
+  type: BLOCK_CODE;
   language: string;
   children: Descendant[];
 };

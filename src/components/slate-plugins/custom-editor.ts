@@ -1,16 +1,17 @@
-import { Editor, Element, Transforms } from "slate";
+import { Editor, Element as SlateElement, Transforms } from "slate";
 import {
   CustomText,
   MarkFormat,
 } from "@/components/slate-plugins/custom-types";
 import {
+  ALIGN,
+  BLOCK_CODE,
   BLOCK_HEADING_ONE,
   BLOCK_HEADING_THREE,
   BLOCK_HEADING_TWO,
-  MARK_BOLD,
-  MARK_CODE,
-  MARK_ITALIC,
-  MARK_UNDERLINE,
+  BLOCK_PARAGRAPH,
+  TEXT_ALIGN_TYPES,
+  TYPE,
 } from "@/components/slate-plugins/constants";
 import {
   MARK_BOLD_HOTKEY,
@@ -50,7 +51,7 @@ export const CustomEditor = {
   // Code
   isCodeBlockActive(editor: any) {
     const [match]: any = Editor.nodes(editor, {
-      match: (n: any) => Element?.isElement(n) && n.type === MARK_CODE,
+      match: (n: any) => SlateElement?.isElement(n) && n.type === BLOCK_CODE,
     });
     return !!match;
   },
@@ -58,14 +59,15 @@ export const CustomEditor = {
     const isActive = CustomEditor.isCodeBlockActive(editor);
     Transforms.setNodes(
       editor,
-      { type: isActive ? undefined : MARK_CODE },
-      { match: (n) => Element?.isElement(n) && Editor.isBlock(editor, n) },
+      { type: isActive ? undefined : BLOCK_CODE },
+      { match: (n) => SlateElement?.isElement(n) && Editor.isBlock(editor, n) },
     );
   },
   // Header - One
   isHeaderOneActive(editor: any) {
     const [match]: any = Editor.nodes(editor, {
-      match: (n: any) => Element?.isElement(n) && n.type === BLOCK_HEADING_ONE,
+      match: (n: any) =>
+        SlateElement?.isElement(n) && n.type === BLOCK_HEADING_ONE,
     });
     return !!match;
   },
@@ -74,14 +76,15 @@ export const CustomEditor = {
     Transforms.setNodes(
       editor,
       { type: isActive ? undefined : BLOCK_HEADING_ONE },
-      { match: (n) => Element?.isElement(n) && Editor.isBlock(editor, n) },
+      { match: (n) => SlateElement?.isElement(n) && Editor.isBlock(editor, n) },
     );
   },
 
   // Header - Two
   isHeaderTwoActive(editor: any) {
     const [match]: any = Editor.nodes(editor, {
-      match: (n: any) => Element?.isElement(n) && n.type === BLOCK_HEADING_TWO,
+      match: (n: any) =>
+        SlateElement?.isElement(n) && n.type === BLOCK_HEADING_TWO,
     });
     return !!match;
   },
@@ -90,14 +93,14 @@ export const CustomEditor = {
     Transforms.setNodes(
       editor,
       { type: isActive ? undefined : BLOCK_HEADING_TWO },
-      { match: (n) => Element?.isElement(n) && Editor.isBlock(editor, n) },
+      { match: (n) => SlateElement?.isElement(n) && Editor.isBlock(editor, n) },
     );
   },
   // Header - Three
   isHeaderThreeActive(editor: any) {
     const [match]: any = Editor.nodes(editor, {
       match: (n: any) =>
-        Element?.isElement(n) && n.type === BLOCK_HEADING_THREE,
+        SlateElement?.isElement(n) && n.type === BLOCK_HEADING_THREE,
     });
     return !!match;
   },
@@ -106,11 +109,50 @@ export const CustomEditor = {
     Transforms.setNodes(
       editor,
       { type: isActive ? undefined : BLOCK_HEADING_THREE },
-      { match: (n) => Element?.isElement(n) && Editor.isBlock(editor, n) },
+      { match: (n) => SlateElement?.isElement(n) && Editor.isBlock(editor, n) },
     );
   },
 };
+export const BlockEditor = {
+  isBlockActive(editor: any, format: string, blockType = TYPE) {
+    const { selection } = editor;
+    if (!selection) return false;
 
+    const [match]: any = Editor.nodes(editor, {
+      match: (n: any) => SlateElement?.isElement(n) && n[blockType] === format,
+    });
+
+    return !!match;
+  },
+
+  toggleBlock(editor: any, format: string) {
+    const isActive = BlockEditor.isBlockActive(
+      editor,
+      format,
+      TEXT_ALIGN_TYPES.includes(format) ? ALIGN : TYPE,
+    );
+
+    let newProperties: Partial<SlateElement>;
+    if (TEXT_ALIGN_TYPES.includes(format)) {
+      console.log("format", format);
+      newProperties = {
+        align: isActive ? undefined : format,
+      };
+    } else {
+      newProperties = {
+        // type: isActive ? BLOCK_PARAGRAPH : isList ? LIST_ITEM : format,
+        type: isActive ? BLOCK_PARAGRAPH : format,
+      };
+    }
+    Transforms.setNodes<SlateElement>(editor, newProperties);
+
+    // Transforms.setNodes(
+    //   editor,
+    //   { type: isActive ? undefined : format },
+    //   { match: (n) => SlateElement?.isElement(n) && Editor.isBlock(editor, n) },
+    // );
+  },
+};
 export const MarkEditor = {
   isMarkActive(editor: any, format: MarkFormat) {
     const marks: Omit<CustomText, "text"> | null = Editor.marks(editor);

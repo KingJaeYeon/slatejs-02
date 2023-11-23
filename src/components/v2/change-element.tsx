@@ -7,7 +7,7 @@ import {
   BULLETED_LIST,
   CHECK_LIST_ITEM,
   LIST_ITEM,
-  MARK_CODE,
+  BLOCK_CODE,
 } from "@/components/slate-plugins/constants";
 
 type ElementProps = {
@@ -34,7 +34,7 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
           {children}
         </blockquote>
       );
-    case MARK_CODE:
+    case BLOCK_CODE:
       return (
         <pre {...attributes}>
           <code>{children}</code>
