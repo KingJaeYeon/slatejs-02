@@ -5,7 +5,7 @@ import {
 } from "@/components/slate-plugins/custom-types";
 import {
   ALIGN,
-  BLOCK_CODE,
+  MARK_CODE,
   BLOCK_PARAGRAPH,
   MARK_BOLD,
   MARK_ITALIC,
@@ -26,7 +26,7 @@ export const keydownEventPlugin = (event: any, editor: any) => {
   switch (event.key) {
     case MARK_CODE_HOTKEY: {
       event.preventDefault();
-      BlockEditor.toggleBlock(editor, BLOCK_CODE);
+      MarkEditor.toggleMark(editor, MARK_CODE);
       break;
     }
     case MARK_BOLD_HOTKEY: {
