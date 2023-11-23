@@ -1,4 +1,11 @@
-import { Descendant, BaseEditor, BaseRange, Range, Element } from "slate";
+import {
+  Descendant,
+  BaseEditor,
+  BaseRange,
+  Range,
+  Element,
+  Operation,
+} from "slate";
 import { ReactEditor } from "slate-react";
 import { HistoryEditor } from "slate-history";
 import {
@@ -176,4 +183,20 @@ declare module "slate" {
       [key: string]: unknown;
     };
   }
+}
+
+export interface HistoryEditor extends BaseEditor {
+  history: History;
+  undo: () => void;
+  redo: () => void;
+  writeHistory: (stack: "undos" | "redos", batch: any) => void;
+}
+export interface History {
+  redos: Batch[];
+  undos: Batch[];
+}
+
+interface Batch {
+  operations: Operation[];
+  selectionBefore: Range | null;
 }
