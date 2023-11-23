@@ -1,9 +1,10 @@
-import { isPlainObject } from 'is-plain-object'
-import { Operation, Range } from 'slate'
+// @ts-ignore
+import { isPlainObject } from "is-plain-object";
+import { Operation, Range } from "slate";
 
 interface Batch {
-  operations: Operation[]
-  selectionBefore: Range | null
+  operations: Operation[];
+  selectionBefore: Range | null;
 }
 
 /**
@@ -12,8 +13,8 @@ interface Batch {
  */
 
 export interface History {
-  redos: Batch[]
-  undos: Batch[]
+  redos: Batch[];
+  undos: Batch[];
 }
 
 // eslint-disable-next-line no-redeclare
@@ -31,6 +32,6 @@ export const History = {
         Operation.isOperationList(value.redos[0].operations)) &&
       (value.undos.length === 0 ||
         Operation.isOperationList(value.undos[0].operations))
-    )
+    );
   },
-}
+};
