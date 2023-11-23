@@ -1,5 +1,8 @@
 import { Editor, Element, Transforms } from "slate";
-import { CustomText } from "@/components/slate-plugins/custom-types";
+import {
+  CustomText,
+  MarkFormat,
+} from "@/components/slate-plugins/custom-types";
 import {
   BLOCK_HEADING_ONE,
   BLOCK_HEADING_THREE,
@@ -27,65 +30,23 @@ export const keydownEventPlugin = (event: any, editor: any) => {
     }
     case MARK_BOLD_HOTKEY: {
       event.preventDefault();
-      CustomEditor.toggleBoldMark(editor);
+      MarkEditor.toggleMark(editor, "bold");
       break;
     }
     case MARK_UNDERLINE_HOTKEY: {
       event.preventDefault();
-      CustomEditor.toggleUnderlineMark(editor);
+      MarkEditor.toggleMark(editor, "underline");
       break;
     }
     case MARK_ITALIC_HOTKEY: {
       event.preventDefault();
-      CustomEditor.toggleItalicMark(editor);
+      MarkEditor.toggleMark(editor, "italic");
       break;
     }
   }
 };
 
 export const CustomEditor = {
-  // Bold
-  isBoldMarkActive(editor: any) {
-    const marks: CustomText | null = Editor.marks(editor);
-    return marks ? marks.bold === true : false;
-  },
-  toggleBoldMark(editor: any) {
-    const isActive = CustomEditor.isBoldMarkActive(editor);
-    if (isActive) {
-      Editor.removeMark(editor, MARK_BOLD);
-    } else {
-      Editor.addMark(editor, MARK_BOLD, true);
-    }
-  },
-
-  // Italic
-  isItalicMarkActive(editor: any) {
-    const marks: CustomText | null = Editor.marks(editor);
-    return marks ? marks.italic === true : false;
-  },
-  toggleItalicMark(editor: any) {
-    const isActive = CustomEditor.isItalicMarkActive(editor);
-    if (isActive) {
-      Editor.removeMark(editor, MARK_ITALIC);
-    } else {
-      Editor.addMark(editor, MARK_ITALIC, true);
-    }
-  },
-
-  // Underline
-  isUnderlineMarkActive(editor: any) {
-    const marks: CustomText | null = Editor.marks(editor);
-    return marks ? marks.underline === true : false;
-  },
-  toggleUnderlineMark(editor: any) {
-    const isActive = CustomEditor.isUnderlineMarkActive(editor);
-    if (isActive) {
-      Editor.removeMark(editor, MARK_UNDERLINE);
-    } else {
-      Editor.addMark(editor, MARK_UNDERLINE, true);
-    }
-  },
-
   // Code
   isCodeBlockActive(editor: any) {
     const [match]: any = Editor.nodes(editor, {
@@ -147,5 +108,20 @@ export const CustomEditor = {
       { type: isActive ? undefined : BLOCK_HEADING_THREE },
       { match: (n) => Element?.isElement(n) && Editor.isBlock(editor, n) },
     );
+  },
+};
+
+export const MarkEditor = {
+  isMarkActive(editor: any, format: MarkFormat) {
+    const marks: Omit<CustomText, "text"> | null = Editor.marks(editor);
+    return marks ? (marks as any)[format] === true : false;
+  },
+  toggleMark(editor: any, format: MarkFormat) {
+    const isActive = MarkEditor.isMarkActive(editor, format);
+    if (isActive) {
+      Editor.removeMark(editor, format);
+    } else {
+      Editor.addMark(editor, format, true);
+    }
   },
 };
