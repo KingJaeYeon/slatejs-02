@@ -1,10 +1,20 @@
 "use client";
 import { Button } from "@/components/button";
 import {
+  BlockEditor,
   CustomEditor,
   MarkEditor,
 } from "@/components/slate-plugins/custom-editor";
 import { useEditorStore } from "@/store/editorStore";
+import {
+  BLOCK_HEADING_ONE,
+  BLOCK_CODE,
+  BLOCK_HEADING_TWO,
+  BLOCK_HEADING_THREE,
+  TEXT_ALIGN_LEFT,
+  TEXT_ALIGN_CENTER,
+  TEXT_ALIGN_RIGHT,
+} from "@/components/slate-plugins/constants";
 
 export const Toolbar = ({ show }: { show: boolean }) => {
   const { editor } = useEditorStore((state) => state);
@@ -22,7 +32,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
-          CustomEditor.toggleCodeBlock(editor);
+          BlockEditor.toggleBlock(editor, BLOCK_CODE);
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
@@ -46,7 +56,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
-          CustomEditor.toggleHeaderOneBlock(editor);
+          BlockEditor.toggleBlock(editor, BLOCK_HEADING_ONE);
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
@@ -54,7 +64,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
-          CustomEditor.toggleHeaderTwoBlock(editor);
+          BlockEditor.toggleBlock(editor, BLOCK_HEADING_TWO);
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
@@ -62,11 +72,35 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
-          CustomEditor.toggleHeaderThreeBlock(editor);
+          BlockEditor.toggleBlock(editor, BLOCK_HEADING_THREE);
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
         H3
+      </Button>
+      <Button
+        onclickHandler={() => {
+          BlockEditor.toggleBlock(editor, TEXT_ALIGN_LEFT);
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        Left
+      </Button>
+      <Button
+        onclickHandler={() => {
+          BlockEditor.toggleBlock(editor, TEXT_ALIGN_CENTER);
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        Center
+      </Button>
+      <Button
+        onclickHandler={() => {
+          BlockEditor.toggleBlock(editor, TEXT_ALIGN_RIGHT);
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        Right
       </Button>
     </div>
   );

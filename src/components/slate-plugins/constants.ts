@@ -2,7 +2,7 @@ export const MARK_BOLD = "bold";
 export const MARK_NORMAL = "normal";
 export const MARK_ITALIC = "italic";
 export const MARK_UNDERLINE = "underline";
-export const MARK_CODE = "code";
+export const BLOCK_CODE = "code";
 export const CODE_LINE = "code-line";
 export const BLOCK_PARAGRAPH = "paragraph";
 export const BLOCK_HEADING_ONE = "heading1";
@@ -36,9 +36,9 @@ export const LIST_ITEM = "list-item";
 export const TYPE = "type";
 export const ALIGN = "align";
 
-export const TEXT_ALIGN_LEFT = "align_left";
-export const TEXT_ALIGN_CENTER = "align_center";
-export const TEXT_ALIGN_RIGHT = "align_right";
+export const TEXT_ALIGN_LEFT = "left";
+export const TEXT_ALIGN_CENTER = "center";
+export const TEXT_ALIGN_RIGHT = "right";
 export const TEXT_ALIGN_TYPES = [
   TEXT_ALIGN_LEFT,
   TEXT_ALIGN_CENTER,
