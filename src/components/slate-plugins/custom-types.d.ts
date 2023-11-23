@@ -17,7 +17,6 @@ import {
   BLOCK_QUOTE,
   BULLETED_LIST,
   BUTTON,
-  CHECK_LIST_ITEM,
   CODE_LINE,
   EDITABLE_VOID,
   IMAGE,
@@ -33,6 +32,7 @@ import {
   TITLE,
   VIDEO,
   MARK_CODE,
+  NUMBER_LIST,
 } from "@/components/slate-plugins/constants";
 
 export type BlockQuoteElement = {
@@ -47,8 +47,8 @@ export type BulletedListElement = {
   children: Descendant[];
 };
 
-export type CheckListItemElement = {
-  type: CHECK_LIST_ITEM;
+export type NumberListElement = {
+  type: NUMBER_LIST;
   checked: boolean;
   children: Descendant[];
 };
@@ -130,7 +130,7 @@ export type CodeLineElement = {
 type CustomElement =
   | BlockQuoteElement
   | BulletedListElement
-  | CheckListItemElement
+  | NumberListElement
   | EditableVoidElement
   | HeadingElement
   | HeadingTwoElement
