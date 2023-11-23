@@ -6,7 +6,7 @@ import {
 } from "@/components/slate-plugins/custom-editor";
 import { useEditorStore } from "@/store/editorStore";
 import {
-  BLOCK_CODE,
+  MARK_CODE,
   BLOCK_HEADING_ONE,
   BLOCK_HEADING_THREE,
   BLOCK_HEADING_TWO,
@@ -44,7 +44,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
-          BlockEditor.toggleBlock(editor, BLOCK_CODE);
+          MarkEditor.toggleMark(editor, MARK_CODE);
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >

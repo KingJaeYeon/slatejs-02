@@ -3,11 +3,9 @@ import {
   BLOCK_HEADING_ONE,
   BLOCK_HEADING_THREE,
   BLOCK_HEADING_TWO,
-  BLOCK_QUOTE,
   BULLETED_LIST,
   CHECK_LIST_ITEM,
   LIST_ITEM,
-  BLOCK_CODE,
 } from "@/components/slate-plugins/constants";
 
 type ElementProps = {
@@ -20,25 +18,20 @@ type LeafProps = {
   children?: any;
   underline?: any;
   leaf: any;
+  code?: any;
 };
 export const Element = ({ attributes, children, element }: ElementProps) => {
   const style = { textAlign: element.align };
   switch (element.type) {
-    case BLOCK_CODE:
-      return (
-        <pre {...attributes} style={style}>
-          <code>{children}</code>
-        </pre>
-      );
     case BLOCK_HEADING_ONE:
       return (
-        <h1 style={style} className={"text-3xl"} {...attributes}>
+        <h1 style={style} className={"text-[32px]"} {...attributes}>
           <strong>{children}</strong>
         </h1>
       );
     case BLOCK_HEADING_TWO:
       return (
-        <h2 style={style} className={"text-2xl"} {...attributes}>
+        <h2 style={style} className={"text-[28px]"} {...attributes}>
           <strong>{children}</strong>
         </h2>
       );
@@ -50,7 +43,7 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
       );
     case BLOCK_HEADING_THREE:
       return (
-        <h3 style={style} className={"text-xl"} {...attributes}>
+        <h3 style={style} className={"text-[24px]"} {...attributes}>
           <strong>{children}</strong>
         </h3>
       );
@@ -72,7 +65,7 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
       );
     default:
       return (
-        <p style={style} {...attributes}>
+        <p style={style} className={"text-[20px]"} {...attributes}>
           {children}
         </p>
       );
@@ -91,6 +84,12 @@ export const Leaf = ({ attributes, children, leaf }: LeafProps) => {
   if (leaf.underline) {
     children = <u>{children}</u>;
   }
-
+  if (leaf.code) {
+    children = (
+      <code className={"rounded bg-gray-100 p-0.5 text-[18px] font-thin"}>
+        {children}
+      </code>
+    );
+  }
   return <span {...attributes}>{children}</span>;
 };

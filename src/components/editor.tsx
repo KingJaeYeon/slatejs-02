@@ -15,7 +15,26 @@ import { Title } from "@/components/title";
 const initialValue: Descendant[] = [
   {
     type: BLOCK_PARAGRAPH,
-    children: [{ text: "A line of text in a paragraph." }],
+    children: [
+      {
+        text: "title: 10 Expert Performance Tips Every Senior JS React Developer Should Know\n",
+      },
+    ],
+  },
+  {
+    type: BLOCK_PARAGRAPH,
+    children: [
+      {
+        text:
+          "Hey, senior JS React developers! Are you looking to take your skills to the next level and optimize your React applications for top-notch performance?\n" +
+          "\n" +
+          "You’re in the right place!\n" +
+          "\n" +
+          "In this article, I’ll share with you 10 expert performance tips that will supercharge your React development.\n" +
+          "\n" +
+          "Get ready to optimize, streamline, and make your apps lightning-fast. Let’s dive in!",
+      },
+    ],
   },
 ];
 

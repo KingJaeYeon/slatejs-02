@@ -17,7 +17,6 @@ import {
   LINK,
   LIST_ITEM,
   MARK_BOLD,
-  BLOCK_CODE,
   MARK_ITALIC,
   MARK_UNDERLINE,
   MENTION,
@@ -26,6 +25,7 @@ import {
   TABLE_ROW,
   TITLE,
   VIDEO,
+  MARK_CODE,
 } from "@/components/slate-plugins/constants";
 
 export type BlockQuoteElement = {
@@ -110,7 +110,7 @@ export type VideoElement = {
 };
 
 export type CodeBlockElement = {
-  type: BLOCK_CODE;
+  type: MARK_CODE;
   language: string;
   children: Descendant[];
 };
@@ -147,10 +147,12 @@ export type CustomText = {
   bold?: boolean;
   italic?: boolean;
   underline?: boolean;
+  code?: boolean;
   text?: string;
 };
 export type MarkFormat =
   | typeof MARK_BOLD
+  | typeof MARK_CODE
   | typeof MARK_ITALIC
   | typeof MARK_UNDERLINE;
 
