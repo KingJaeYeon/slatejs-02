@@ -2,6 +2,7 @@
 import { Button } from "@/components/button";
 import {
   BlockEditor,
+  ListEditor,
   MarkEditor,
 } from "@/components/slate-plugins/custom-editor";
 import { useEditorStore } from "@/store/editorStore";
@@ -17,6 +18,8 @@ import {
   TEXT_ALIGN_CENTER,
   TEXT_ALIGN_LEFT,
   TEXT_ALIGN_RIGHT,
+  NUMBER_LIST,
+  BULLETED_LIST,
 } from "@/components/slate-plugins/constants";
 
 export const Toolbar = ({ show }: { show: boolean }) => {
@@ -113,6 +116,22 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
         Right
+      </Button>
+      <Button
+        onclickHandler={() => {
+          ListEditor.toggleList(editor, NUMBER_LIST);
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        Number
+      </Button>
+      <Button
+        onclickHandler={() => {
+          ListEditor.toggleList(editor, BULLETED_LIST);
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        Bullet
       </Button>
     </div>
   );

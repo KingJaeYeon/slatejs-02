@@ -17,8 +17,9 @@ export const BUTTON = "button";
 export const BADGE = "badge";
 export const LINE_HEIGHT = "line-height";
 export const EMOJI_SMAIL = "smail";
+export const ITEM_LIST = "item-list";
 export const BULLETED_LIST = "bulleted-list";
-export const CHECK_LIST_ITEM = "check-list-item";
+export const NUMBER_LIST = "number-list";
 export const MENTION = "mention";
 export const EMOJI_SQUIRREL = "squirrel";
 export const EMOJI_APPLE = "apple";
@@ -44,3 +45,4 @@ export const TEXT_ALIGN_TYPES = [
   TEXT_ALIGN_CENTER,
   TEXT_ALIGN_RIGHT,
 ];
+export const LIST_TYPES = [NUMBER_LIST, BULLETED_LIST];

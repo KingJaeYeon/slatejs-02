@@ -4,7 +4,7 @@ import {
   BLOCK_HEADING_THREE,
   BLOCK_HEADING_TWO,
   BULLETED_LIST,
-  CHECK_LIST_ITEM,
+  NUMBER_LIST,
   LIST_ITEM,
 } from "@/components/slate-plugins/constants";
 
@@ -35,29 +35,33 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
           <strong>{children}</strong>
         </h2>
       );
-    case LIST_ITEM:
-      return (
-        <li style={style} {...attributes}>
-          {children}
-        </li>
-      );
     case BLOCK_HEADING_THREE:
       return (
         <h3 style={style} className={"text-[24px]"} {...attributes}>
           <strong>{children}</strong>
         </h3>
       );
+    case LIST_ITEM:
+      return (
+        <li style={style} className={"mb-2"} {...attributes}>
+          {children}
+        </li>
+      );
     case BULLETED_LIST:
       return (
-        <ul style={style} className={"list-inside list-disc"} {...attributes}>
+        <ul
+          style={style}
+          className={"mb-2 list-inside list-disc text-[20px]"}
+          {...attributes}
+        >
           {children}
         </ul>
       );
-    case CHECK_LIST_ITEM:
+    case NUMBER_LIST:
       return (
         <ol
           style={style}
-          className={"list-inside list-decimal"}
+          className={"list-inside list-decimal text-[20px]"}
           {...attributes}
         >
           {children}

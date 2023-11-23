@@ -12,6 +12,8 @@ import {
   MARK_UNDERLINE,
   TEXT_ALIGN_TYPES,
   TYPE,
+  LIST_TYPES,
+  LIST_ITEM,
 } from "@/components/slate-plugins/constants";
 import {
   MARK_BOLD_HOTKEY,
@@ -46,10 +48,34 @@ export const keydownEventPlugin = (event: any, editor: any) => {
     }
   }
 };
-export const ShiftEventPlugin = (event: any, editor: any) => {
-  if (event.shiftKey && event.key === "Enter") {
-  }
+
+export const ListEditor = {
+  isListActive(editor: any, format: string) {
+    const [match]: any = Editor.nodes(editor, {
+      match: (n: any) => n.type === format,
+    });
+    return !!match;
+  },
+
+  toggleList(editor: any, format: string) {
+    const isActive = ListEditor.isListActive(editor, format);
+    const isList = LIST_TYPES.includes(format);
+    Transforms.unwrapNodes(editor, {
+      match: (n: any) => LIST_TYPES.includes(n.type),
+      split: true,
+    });
+
+    Transforms.setNodes(editor, {
+      type: isActive ? BLOCK_PARAGRAPH : isList ? LIST_ITEM : format,
+    });
+
+    if (!isActive && isList) {
+      const block = { type: format, children: [] };
+      Transforms.wrapNodes(editor, block);
+    }
+  },
 };
+
 export const BlockEditor = {
   isBlockActive(editor: any, format: string, blockType = TYPE) {
     const { selection } = editor;
@@ -58,7 +84,6 @@ export const BlockEditor = {
     const [match]: any = Editor.nodes(editor, {
       match: (n: any) => SlateElement?.isElement(n) && n[blockType] === format,
     });
-
     return !!match;
   },
 
@@ -68,6 +93,8 @@ export const BlockEditor = {
       format,
       TEXT_ALIGN_TYPES.includes(format) ? ALIGN : TYPE,
     );
+
+    // const isList = LIST_TYPES.includes(format);
 
     let newProperties: Partial<SlateElement>;
     if (TEXT_ALIGN_TYPES.includes(format)) {
@@ -80,7 +107,14 @@ export const BlockEditor = {
         type: isActive ? BLOCK_PARAGRAPH : format,
       };
     }
+    console.log("newProperties::", newProperties);
     Transforms.setNodes<SlateElement>(editor, newProperties);
+
+    // if (!isActive && isList) {
+    //   const block = { type: format, children: [] };
+    //   console.log("block::", block);
+    //   Transforms.wrapNodes(editor, block);
+    // }
   },
 };
 export const MarkEditor = {

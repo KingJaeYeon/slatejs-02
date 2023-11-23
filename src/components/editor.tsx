@@ -1,14 +1,17 @@
 "use client";
 import React from "react";
 import { Editable, Slate } from "slate-react";
-import { Descendant } from "slate";
+import { Descendant, Editor as SlateEditor, Transforms } from "slate";
 import { renderElement, renderLeaf } from "@/components/v2/element-render";
 import { useEditorStore } from "@/store/editorStore";
+import { keydownEventPlugin } from "@/components/slate-plugins/custom-editor";
 import {
-  keydownEventPlugin,
-  ShiftEventPlugin,
-} from "@/components/slate-plugins/custom-editor";
-import { BLOCK_PARAGRAPH } from "@/components/slate-plugins/constants";
+  BLOCK_PARAGRAPH,
+  BULLETED_LIST,
+  LIST_ITEM,
+  LIST_TYPES,
+  NUMBER_LIST,
+} from "@/components/slate-plugins/constants";
 import { Toolbar } from "@/components/toolbar";
 import { Title } from "@/components/title";
 
@@ -51,10 +54,40 @@ function Editor(props: any) {
           <Editable
             className={"w-full outline-none"}
             renderElement={renderElement}
+            onKeyDownCapture={(event) => {
+              if (event.key === "Enter" && event.shiftKey) {
+                event.preventDefault();
+                editor.insertText("\n");
+              }
+              if (event.key === "Backspace" || event.key === "Delete") {
+                const [match]: any = SlateEditor.nodes(editor, {
+                  match: (n: any) =>
+                    n.type === NUMBER_LIST || n.type === BULLETED_LIST,
+                });
+                if (!!match) {
+                  const length =
+                    match[0].children[match[0].children.length - 1].children[0]
+                      .text.length;
+                  if (length === 0) {
+                    console.log(match);
+                    event.preventDefault();
+                    Transforms.unwrapNodes(editor, {
+                      match: (n: any) => LIST_TYPES.includes(n.type),
+                      split: false,
+                    });
+                    Transforms.setNodes(editor, {
+                      type: BLOCK_PARAGRAPH,
+                    });
+                  }
+                }
+                // if (!!match) {
+                //   event.preventDefault();
+                // }
+              }
+            }}
             renderLeaf={renderLeaf}
             onKeyDown={(event) => {
-              if (event.key === "Enter") {
-                ShiftEventPlugin(event, editor);
+              if (event.key === "Enter" && event.shiftKey) {
               } else {
                 keydownEventPlugin(event, editor);
               }
