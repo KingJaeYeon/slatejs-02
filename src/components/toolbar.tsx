@@ -2,17 +2,19 @@
 import { Button } from "@/components/button";
 import {
   BlockEditor,
-  CustomEditor,
   MarkEditor,
 } from "@/components/slate-plugins/custom-editor";
 import { useEditorStore } from "@/store/editorStore";
 import {
-  BLOCK_HEADING_ONE,
   BLOCK_CODE,
-  BLOCK_HEADING_TWO,
+  BLOCK_HEADING_ONE,
   BLOCK_HEADING_THREE,
-  TEXT_ALIGN_LEFT,
+  BLOCK_HEADING_TWO,
+  MARK_BOLD,
+  MARK_ITALIC,
+  MARK_UNDERLINE,
   TEXT_ALIGN_CENTER,
+  TEXT_ALIGN_LEFT,
   TEXT_ALIGN_RIGHT,
 } from "@/components/slate-plugins/constants";
 
@@ -24,7 +26,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       <Button
         title={"ctrl+b"}
         onclickHandler={() => {
-          MarkEditor.toggleMark(editor, "bold");
+          MarkEditor.toggleMark(editor, MARK_BOLD);
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
@@ -40,7 +42,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
-          MarkEditor.toggleMark(editor, "underline");
+          MarkEditor.toggleMark(editor, MARK_UNDERLINE);
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
@@ -48,7 +50,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
-          MarkEditor.toggleMark(editor, "italic");
+          MarkEditor.toggleMark(editor, MARK_ITALIC);
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >

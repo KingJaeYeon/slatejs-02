@@ -36,7 +36,7 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
       );
     case BLOCK_CODE:
       return (
-        <pre {...attributes}>
+        <pre {...attributes} style={style}>
           <code>{children}</code>
         </pre>
       );
