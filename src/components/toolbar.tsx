@@ -10,6 +10,7 @@ import {
   BLOCK_HEADING_ONE,
   BLOCK_HEADING_THREE,
   BLOCK_HEADING_TWO,
+  BLOCK_PARAGRAPH,
   MARK_BOLD,
   MARK_ITALIC,
   MARK_UNDERLINE,
@@ -23,6 +24,15 @@ export const Toolbar = ({ show }: { show: boolean }) => {
   if (!show) return null;
   return (
     <div className={"flex"}>
+      <Button
+        title={"ctrl+b"}
+        onclickHandler={() => {
+          BlockEditor.toggleBlock(editor, BLOCK_PARAGRAPH);
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        P
+      </Button>
       <Button
         title={"ctrl+b"}
         onclickHandler={() => {

@@ -24,16 +24,6 @@ type LeafProps = {
 export const Element = ({ attributes, children, element }: ElementProps) => {
   const style = { textAlign: element.align };
   switch (element.type) {
-    case BLOCK_QUOTE:
-      return (
-        <blockquote
-          className={"me-10 ms-10 block rounded bg-gray-100 p-4"}
-          style={style}
-          {...attributes}
-        >
-          {children}
-        </blockquote>
-      );
     case BLOCK_CODE:
       return (
         <pre {...attributes} style={style}>

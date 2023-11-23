@@ -33,7 +33,7 @@ export const Title = (props: any) => {
         placeholder="제목"
         maxLength={100}
         className={cn(
-          "flex h-auto w-full resize-none flex-wrap text-3xl outline-none",
+          "flex h-auto w-full resize-none flex-wrap text-[42px] font-bold leading-[52px] outline-none",
         )}
         tabIndex={0}
         onKeyDown={handleKeyDown}
