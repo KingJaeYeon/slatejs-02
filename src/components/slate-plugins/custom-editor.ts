@@ -10,6 +10,9 @@ import {
   BLOCK_HEADING_THREE,
   BLOCK_HEADING_TWO,
   BLOCK_PARAGRAPH,
+  MARK_BOLD,
+  MARK_ITALIC,
+  MARK_UNDERLINE,
   TEXT_ALIGN_TYPES,
   TYPE,
 } from "@/components/slate-plugins/constants";
@@ -26,22 +29,22 @@ export const keydownEventPlugin = (event: any, editor: any) => {
   switch (event.key) {
     case MARK_CODE_HOTKEY: {
       event.preventDefault();
-      CustomEditor.toggleCodeBlock(editor);
+      BlockEditor.toggleBlock(editor, BLOCK_CODE);
       break;
     }
     case MARK_BOLD_HOTKEY: {
       event.preventDefault();
-      MarkEditor.toggleMark(editor, "bold");
+      MarkEditor.toggleMark(editor, MARK_BOLD);
       break;
     }
     case MARK_UNDERLINE_HOTKEY: {
       event.preventDefault();
-      MarkEditor.toggleMark(editor, "underline");
+      MarkEditor.toggleMark(editor, MARK_UNDERLINE);
       break;
     }
     case MARK_ITALIC_HOTKEY: {
       event.preventDefault();
-      MarkEditor.toggleMark(editor, "italic");
+      MarkEditor.toggleMark(editor, MARK_ITALIC);
       break;
     }
   }
@@ -134,7 +137,6 @@ export const BlockEditor = {
 
     let newProperties: Partial<SlateElement>;
     if (TEXT_ALIGN_TYPES.includes(format)) {
-      console.log("format", format);
       newProperties = {
         align: isActive ? undefined : format,
       };
