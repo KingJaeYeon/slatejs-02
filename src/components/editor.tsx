@@ -73,7 +73,7 @@ function Editor(props: any) {
                     event.preventDefault();
                     Transforms.unwrapNodes(editor, {
                       match: (n: any) => LIST_TYPES.includes(n.type),
-                      split: false,
+                      split: true,
                     });
                     Transforms.setNodes(editor, {
                       type: BLOCK_PARAGRAPH,
