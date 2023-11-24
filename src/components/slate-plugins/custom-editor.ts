@@ -20,6 +20,7 @@ import {
   LIST_ITEM,
   NUMBER_LIST,
   BULLETED_LIST,
+  IMAGE,
 } from "@/components/slate-plugins/constants";
 import {
   MARK_BOLD_HOTKEY,
@@ -147,7 +148,6 @@ export const BlockEditor = {
         type: isActive ? BLOCK_PARAGRAPH : format,
       };
     }
-    console.log("newProperties::", newProperties);
     Transforms.setNodes<SlateElement>(editor, newProperties);
   },
 };

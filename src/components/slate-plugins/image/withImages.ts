@@ -1,8 +1,11 @@
-import { ImageElement } from "@/components/slate-plugins/custom-types";
+import {
+  ImageElement,
+  ParagraphElement,
+} from "@/components/slate-plugins/custom-types";
 import { Transforms } from "slate";
 import imageExtensions from "image-extensions";
 import isUrl from "is-url";
-import { IMAGE } from "@/components/slate-plugins/constants";
+import { BLOCK_PARAGRAPH, IMAGE } from "@/components/slate-plugins/constants";
 export const withImages = (editor: any) => {
   const { insertData, isVoid } = editor;
 
@@ -42,6 +45,10 @@ const insertImage = (editor: any, url: any) => {
   const text = { text: "" };
   const image: ImageElement = { type: IMAGE, url, children: [text] };
   Transforms.insertNodes(editor, image);
+  Transforms.insertNodes(editor, {
+    type: BLOCK_PARAGRAPH,
+    children: [{ text: "" }],
+  });
 };
 const isImageUrl = (url: any) => {
   if (!url) return false;
