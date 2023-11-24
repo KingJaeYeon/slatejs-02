@@ -20,7 +20,6 @@ import {
   CODE_LINE,
   EDITABLE_VOID,
   IMAGE,
-  LINK,
   LIST_ITEM,
   MARK_BOLD,
   MARK_ITALIC,
@@ -34,6 +33,7 @@ import {
   MARK_CODE,
   NUMBER_LIST,
   HR,
+  MARK_LINK,
 } from "@/components/slate-plugins/constants";
 
 export type BlockQuoteElement = {
@@ -121,12 +121,12 @@ export type VideoElement = {
   url: string;
   children: EmptyText[];
 };
-
-export type CodeBlockElement = {
-  type: MARK_CODE;
-  language: string;
-  children: Descendant[];
-};
+//
+// export type CodeBlockElement = {
+//   type: MARK_CODE;
+//   language: string;
+//   children: Descendant[];
+// };
 
 export type CodeLineElement = {
   type: CODE_LINE;
@@ -162,10 +162,12 @@ export type CustomText = {
   italic?: boolean;
   underline?: boolean;
   code?: boolean;
+  link?: boolean;
   text?: string;
 };
 export type MarkFormat =
   | typeof MARK_BOLD
+  | typeof MARK_LINK
   | typeof MARK_CODE
   | typeof MARK_ITALIC
   | typeof MARK_UNDERLINE;

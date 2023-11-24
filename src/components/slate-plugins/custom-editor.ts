@@ -6,7 +6,6 @@ import {
 import {
   CustomText,
   HRElement,
-  ImageElement,
   MarkFormat,
 } from "@/components/slate-plugins/custom-types";
 import {
@@ -22,8 +21,8 @@ import {
   LIST_ITEM,
   NUMBER_LIST,
   BULLETED_LIST,
-  IMAGE,
   HR,
+  MARK_LINK,
 } from "@/components/slate-plugins/constants";
 import {
   MARK_BOLD_HOTKEY,
@@ -31,6 +30,7 @@ import {
   MARK_ITALIC_HOTKEY,
   MARK_UNDERLINE_HOTKEY,
 } from "@/components/slate-plugins/constants-hotkey";
+import Link from "next/link";
 
 export const keydownEventPlugin = (event: any, editor: any) => {
   if (!event.ctrlKey) return;
