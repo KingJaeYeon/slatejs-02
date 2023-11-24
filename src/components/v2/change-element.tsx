@@ -7,8 +7,10 @@ import {
   NUMBER_LIST,
   LIST_ITEM,
   IMAGE,
+  HR,
 } from "@/components/slate-plugins/constants";
 import { Image } from "@/components/slate-plugins/image/Image";
+import { HrElement } from "@/components/slate-plugins/hr/Hr";
 
 export type ElementProps = {
   attributes: any;
@@ -75,6 +77,8 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
           {children}
         </Image>
       );
+    case HR:
+      return <HrElement element={element} attributes={attributes} />;
     default:
       return (
         <p style={style} className={"text-[20px]"} {...attributes}>

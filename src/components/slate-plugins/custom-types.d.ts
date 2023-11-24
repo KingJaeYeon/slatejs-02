@@ -33,6 +33,7 @@ import {
   VIDEO,
   MARK_CODE,
   NUMBER_LIST,
+  HR,
 } from "@/components/slate-plugins/constants";
 
 export type BlockQuoteElement = {
@@ -79,6 +80,11 @@ export type HeadingThreeElement = {
 export type ImageElement = {
   type: IMAGE;
   url: string;
+  children: EmptyText[];
+};
+export type HRElement = {
+  type: HR;
+  align?: string;
   children: EmptyText[];
 };
 
@@ -147,6 +153,7 @@ type CustomElement =
   | TableCellElement
   | TitleElement
   | VideoElement
+  | HRElement
   | CodeBlockElement
   | CodeLineElement;
 
@@ -191,6 +198,7 @@ export interface HistoryEditor extends BaseEditor {
   redo: () => void;
   writeHistory: (stack: "undos" | "redos", batch: any) => void;
 }
+
 export interface History {
   redos: Batch[];
   undos: Batch[];

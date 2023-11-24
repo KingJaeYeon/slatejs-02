@@ -5,6 +5,8 @@ import {
 } from "slate";
 import {
   CustomText,
+  HRElement,
+  ImageElement,
   MarkFormat,
 } from "@/components/slate-plugins/custom-types";
 import {
@@ -21,6 +23,7 @@ import {
   NUMBER_LIST,
   BULLETED_LIST,
   IMAGE,
+  HR,
 } from "@/components/slate-plugins/constants";
 import {
   MARK_BOLD_HOTKEY,
@@ -92,7 +95,16 @@ export const ListDeleter = {
     }
   },
 };
-
+export const HREditor = {
+  toggleHR(editor: any) {
+    const hr: HRElement = { type: HR, children: [{ text: "" }] };
+    Transforms.insertNodes(editor, hr);
+    Transforms.insertNodes(editor, {
+      type: BLOCK_PARAGRAPH,
+      children: [{ text: "" }],
+    });
+  },
+};
 export const ListEditor = {
   isListActive(editor: any, format: string) {
     const [match]: any = SlateEditor.nodes(editor, {

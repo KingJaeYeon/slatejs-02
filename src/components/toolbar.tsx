@@ -3,6 +3,7 @@ import { Button } from "@/components/button";
 import React from "react";
 import {
   BlockEditor,
+  HREditor,
   ListEditor,
   MarkEditor,
 } from "@/components/slate-plugins/custom-editor";
@@ -21,6 +22,7 @@ import {
   TEXT_ALIGN_RIGHT,
   NUMBER_LIST,
   BULLETED_LIST,
+  HR,
 } from "@/components/slate-plugins/constants";
 import { insertImage } from "@/components/slate-plugins/image/withImages";
 
@@ -167,6 +169,14 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
         File
+      </Button>
+      <Button
+        onclickHandler={() => {
+          HREditor.toggleHR(editor);
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        HR
       </Button>
     </div>
   );
