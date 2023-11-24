@@ -1,11 +1,9 @@
 "use client";
 import React from "react";
-import { Editable, ReactEditor, Slate } from "slate-react";
-import { Descendant, Editor as SlateEditor, Transforms } from "slate";
+import { Editable, Slate } from "slate-react";
 import { renderElement, renderLeaf } from "@/components/v2/element-render";
 import { useEditorStore } from "@/store/editorStore";
 import {
-  BlockEditor,
   keydownEventPlugin,
   ListDeleter,
   ShiftEnter,
@@ -13,9 +11,8 @@ import {
 import { BLOCK_PARAGRAPH } from "@/components/slate-plugins/constants";
 import { Toolbar } from "@/components/toolbar";
 import { Title } from "@/components/title";
-import isUrl from "is-url";
 
-const initialValue: Descendant[] = [
+const initialValue = [
   {
     type: BLOCK_PARAGRAPH,
     children: [
@@ -42,7 +39,7 @@ const initialValue: Descendant[] = [
 ];
 
 function Editor(props: any) {
-  const { editor, shift } = useEditorStore((state) => state);
+  const { editor } = useEditorStore((state) => state);
 
   return (
     <div className={"flex w-full flex-col items-center px-2 py-1"}>

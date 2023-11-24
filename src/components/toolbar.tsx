@@ -41,9 +41,11 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       reader.readAsDataURL(file);
     }
 
-    if (!!ref.current?.value) {
+    // if (!!ref.current?.value) {
+    if ("value" in ref.current) {
       ref.current.value = "";
     }
+    // }
   }
 
   return (
@@ -171,7 +173,9 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       />
       <Button
         onclickHandler={() => {
-          if (ref.current) ref.current.click();
+          if ("click" in ref.current) {
+            ref.current.click();
+          }
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >

@@ -3,13 +3,13 @@ import React from "react";
 import { cn } from "@/lib/utils";
 
 type ButtonProps = {
-  className?: string;
+  className: string;
   title?: string;
   children?: React.ReactNode;
   onclickHandler?: () => void;
 };
 export const Button = ({
-  className,
+  className = "",
   title,
   children,
   onclickHandler,
