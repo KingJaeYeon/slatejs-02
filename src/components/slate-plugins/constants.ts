@@ -1,6 +1,7 @@
 export const MARK_BOLD = "bold";
 export const MARK_NORMAL = "normal";
 export const HR = "hr";
+export const MARK_LINK = "link";
 export const MARK_ITALIC = "italic";
 export const MARK_UNDERLINE = "underline";
 export const MARK_CODE = "code";
@@ -13,7 +14,6 @@ export const BLOCK_HEADING_THREE = "heading3";
 export const IMAGE = "image";
 export const VIDEO = "video";
 export const EDITABLE_VOID = "editable-void";
-export const LINK = "link";
 export const BUTTON = "button";
 export const BADGE = "badge";
 export const LINE_HEIGHT = "line-height";

@@ -9,20 +9,19 @@ import {
 } from "@/components/slate-plugins/custom-editor";
 import { useEditorStore } from "@/store/editorStore";
 import {
-  MARK_CODE,
-  BLOCK_HEADING_ONE,
   BLOCK_HEADING_THREE,
   BLOCK_HEADING_TWO,
   BLOCK_PARAGRAPH,
+  BULLETED_LIST,
   MARK_BOLD,
+  MARK_CODE,
   MARK_ITALIC,
+  MARK_LINK,
   MARK_UNDERLINE,
+  NUMBER_LIST,
   TEXT_ALIGN_CENTER,
   TEXT_ALIGN_LEFT,
   TEXT_ALIGN_RIGHT,
-  NUMBER_LIST,
-  BULLETED_LIST,
-  HR,
 } from "@/components/slate-plugins/constants";
 import { insertImage } from "@/components/slate-plugins/image/withImages";
 
@@ -93,7 +92,15 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       </Button>
       <Button
         onclickHandler={() => {
-          BlockEditor.toggleBlock(editor, BLOCK_HEADING_ONE);
+          MarkEditor.toggleMark(editor, MARK_ITALIC);
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        Link
+      </Button>
+      <Button
+        onclickHandler={() => {
+          MarkEditor.toggleMark(editor, MARK_LINK);
         }}
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
