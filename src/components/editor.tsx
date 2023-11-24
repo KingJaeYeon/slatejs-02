@@ -4,7 +4,11 @@ import { Editable, Slate } from "slate-react";
 import { Descendant, Editor as SlateEditor, Transforms } from "slate";
 import { renderElement, renderLeaf } from "@/components/v2/element-render";
 import { useEditorStore } from "@/store/editorStore";
-import { keydownEventPlugin } from "@/components/slate-plugins/custom-editor";
+import {
+  keydownEventPlugin,
+  ListDeleter,
+  ShiftEnter,
+} from "@/components/slate-plugins/custom-editor";
 import {
   BLOCK_PARAGRAPH,
   BULLETED_LIST,
@@ -56,33 +60,10 @@ function Editor(props: any) {
             renderElement={renderElement}
             onKeyDownCapture={(event) => {
               if (event.key === "Enter" && event.shiftKey) {
-                event.preventDefault();
-                editor.insertText("\n");
+                ShiftEnter(event, editor);
               }
               if (event.key === "Backspace" || event.key === "Delete") {
-                const [match]: any = SlateEditor.nodes(editor, {
-                  match: (n: any) =>
-                    n.type === NUMBER_LIST || n.type === BULLETED_LIST,
-                });
-                if (!!match) {
-                  const length =
-                    match[0].children[match[0].children.length - 1].children[0]
-                      .text.length;
-                  if (length === 0) {
-                    console.log(match);
-                    event.preventDefault();
-                    Transforms.unwrapNodes(editor, {
-                      match: (n: any) => LIST_TYPES.includes(n.type),
-                      split: true,
-                    });
-                    Transforms.setNodes(editor, {
-                      type: BLOCK_PARAGRAPH,
-                    });
-                  }
-                }
-                // if (!!match) {
-                //   event.preventDefault();
-                // }
+                ListDeleter.ActionHandler(editor, event);
               }
             }}
             renderLeaf={renderLeaf}
