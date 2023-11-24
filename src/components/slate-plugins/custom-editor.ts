@@ -1,4 +1,10 @@
-import { Editor, Element as SlateElement, Transforms } from "slate";
+import {
+  Editor as SlateEditor,
+  Editor,
+  Node,
+  Element as SlateElement,
+  Transforms,
+} from "slate";
 import {
   CustomText,
   MarkFormat,
@@ -14,6 +20,8 @@ import {
   TYPE,
   LIST_TYPES,
   LIST_ITEM,
+  NUMBER_LIST,
+  BULLETED_LIST,
 } from "@/components/slate-plugins/constants";
 import {
   MARK_BOLD_HOTKEY,
@@ -47,6 +55,43 @@ export const keydownEventPlugin = (event: any, editor: any) => {
       break;
     }
   }
+};
+
+export const ShiftEnter = (event: any, editor: any) => {
+  event.preventDefault();
+  editor.insertText("\n");
+};
+
+export const ListDeleter = {
+  isElementListType(editor: any) {
+    const [match]: any = SlateEditor.nodes(editor, {
+      match: (n: any) => n.type === NUMBER_LIST || n.type === BULLETED_LIST,
+    });
+    let length;
+    if (!!match) {
+      length =
+        match[0].children[match[0].children.length - 1].children[0].text.length;
+    }
+    return {
+      isMatch: !!match,
+      match,
+      length,
+    };
+  },
+
+  ActionHandler(editor: any, event: any) {
+    const { isMatch, length } = ListDeleter.isElementListType(editor);
+    if (length === 0 && isMatch) {
+      event.preventDefault();
+      Transforms.unwrapNodes(editor, {
+        match: (n: any) => LIST_TYPES.includes(n.type),
+        split: true,
+      });
+      Transforms.setNodes(editor, {
+        type: BLOCK_PARAGRAPH,
+      });
+    }
+  },
 };
 
 export const ListEditor = {
@@ -94,8 +139,6 @@ export const BlockEditor = {
       TEXT_ALIGN_TYPES.includes(format) ? ALIGN : TYPE,
     );
 
-    // const isList = LIST_TYPES.includes(format);
-
     let newProperties: Partial<SlateElement>;
     if (TEXT_ALIGN_TYPES.includes(format)) {
       newProperties = {
@@ -103,25 +146,20 @@ export const BlockEditor = {
       };
     } else {
       newProperties = {
-        // type: isActive ? BLOCK_PARAGRAPH : isList ? LIST_ITEM : format,
         type: isActive ? BLOCK_PARAGRAPH : format,
       };
     }
     console.log("newProperties::", newProperties);
     Transforms.setNodes<SlateElement>(editor, newProperties);
-
-    // if (!isActive && isList) {
-    //   const block = { type: format, children: [] };
-    //   console.log("block::", block);
-    //   Transforms.wrapNodes(editor, block);
-    // }
   },
 };
+
 export const MarkEditor = {
   isMarkActive(editor: any, format: MarkFormat) {
     const marks: Omit<CustomText, "text"> | null = Editor.marks(editor);
     return marks ? (marks as any)[format] === true : false;
   },
+
   toggleMark(editor: any, format: MarkFormat) {
     const isActive = MarkEditor.isMarkActive(editor, format);
     if (isActive) {
