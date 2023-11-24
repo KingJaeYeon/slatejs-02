@@ -3,9 +3,9 @@ import {
   ParagraphElement,
 } from "@/components/slate-plugins/custom-types";
 import { Transforms } from "slate";
-import imageExtensions from "image-extensions";
 import isUrl from "is-url";
 import { BLOCK_PARAGRAPH, IMAGE } from "@/components/slate-plugins/constants";
+import { imageExtensionsJs } from "@/lib/utilsJS";
 
 export const withImages = (editor: any) => {
   const { insertData, isVoid } = editor;
@@ -56,5 +56,5 @@ const isImageUrl = (url: any) => {
   if (!url) return false;
   if (!isUrl(url)) return false;
   const ext = new URL(url).pathname.split(".").pop();
-  return imageExtensions.includes(ext as string);
+  return imageExtensionsJs(ext as string);
 };
