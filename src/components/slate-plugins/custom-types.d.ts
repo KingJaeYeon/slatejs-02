@@ -88,7 +88,11 @@ export type HRElement = {
   children: EmptyText[];
 };
 
-export type LinkElement = { type: LINK; url: string; children: Descendant[] };
+export type LinkElement = {
+  type: MARK_LINK;
+  url: string;
+  children: Descendant[];
+};
 
 export type ButtonElement = { type: BUTTON; children: Descendant[] };
 
@@ -133,7 +137,7 @@ export type CodeLineElement = {
   children: Descendant[];
 };
 
-type CustomElement =
+export type CustomElement =
   | BlockQuoteElement
   | BulletedListElement
   | NumberListElement
@@ -154,7 +158,7 @@ type CustomElement =
   | TitleElement
   | VideoElement
   | HRElement
-  | CodeBlockElement
+  // | CodeBlockElement
   | CodeLineElement;
 
 export type CustomText = {

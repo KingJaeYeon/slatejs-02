@@ -7,6 +7,7 @@ import {
   CustomText,
   HRElement,
   MarkFormat,
+  ParagraphElement,
 } from "@/components/slate-plugins/custom-types";
 import {
   ALIGN,
@@ -22,7 +23,6 @@ import {
   NUMBER_LIST,
   BULLETED_LIST,
   HR,
-  MARK_LINK,
 } from "@/components/slate-plugins/constants";
 import {
   MARK_BOLD_HOTKEY,
@@ -30,7 +30,6 @@ import {
   MARK_ITALIC_HOTKEY,
   MARK_UNDERLINE_HOTKEY,
 } from "@/components/slate-plugins/constants-hotkey";
-import Link from "next/link";
 
 export const keydownEventPlugin = (event: any, editor: any) => {
   if (!event.ctrlKey) return;
@@ -91,18 +90,19 @@ export const ListDeleter = {
       });
       Transforms.setNodes(editor, {
         type: BLOCK_PARAGRAPH,
-      });
+      } as any);
     }
   },
 };
 export const HREditor = {
   toggleHR(editor: any) {
     const hr: HRElement = { type: HR, children: [{ text: "" }] };
-    Transforms.insertNodes(editor, hr);
-    Transforms.insertNodes(editor, {
+    const paragraph: ParagraphElement = {
       type: BLOCK_PARAGRAPH,
       children: [{ text: "" }],
-    });
+    };
+    Transforms.insertNodes(editor, hr);
+    Transforms.insertNodes(editor, paragraph);
   },
 };
 export const ListEditor = {
@@ -123,7 +123,7 @@ export const ListEditor = {
 
     Transforms.setNodes(editor, {
       type: isActive ? BLOCK_PARAGRAPH : isList ? LIST_ITEM : format,
-    });
+    } as any);
 
     if (!isActive && isList) {
       const block = { type: format, children: [] };
@@ -139,7 +139,7 @@ export const BlockEditor = {
 
     const [match]: any = SlateEditor.nodes(editor, {
       match: (n: any) => SlateElement?.isElement(n) && n[blockType] === format,
-    });
+    } as any);
     return !!match;
   },
 
@@ -154,11 +154,11 @@ export const BlockEditor = {
     if (TEXT_ALIGN_TYPES.includes(format)) {
       newProperties = {
         align: isActive ? undefined : format,
-      };
+      } as any;
     } else {
       newProperties = {
         type: isActive ? BLOCK_PARAGRAPH : format,
-      };
+      } as any;
     }
     Transforms.setNodes<SlateElement>(editor, newProperties);
   },
