@@ -1,7 +1,4 @@
-import {
-  ImageElement,
-  ParagraphElement,
-} from "@/components/slate-plugins/custom-types";
+import { ImageElement } from "@/components/slate-plugins/custom-types";
 import { Transforms } from "slate";
 import imageExtensions from "image-extensions";
 import isUrl from "is-url";
@@ -41,7 +38,7 @@ export const withImages = (editor: any) => {
   return editor;
 };
 
-const insertImage = (editor: any, url: any) => {
+export const insertImage = (editor: any, url: any) => {
   const text = { text: "" };
   const image: ImageElement = { type: IMAGE, url, children: [text] };
   Transforms.insertNodes(editor, image);

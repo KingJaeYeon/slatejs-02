@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/button";
+import React from "react";
 import {
   BlockEditor,
   ListEditor,
@@ -21,10 +22,29 @@ import {
   NUMBER_LIST,
   BULLETED_LIST,
 } from "@/components/slate-plugins/constants";
+import { insertImage } from "@/components/slate-plugins/image/withImages";
 
 export const Toolbar = ({ show }: { show: boolean }) => {
   const { editor } = useEditorStore((state) => state);
+  const ref = React.useRef<HTMLInputElement>();
   if (!show) return null;
+
+  function fileInputChange(e: any) {
+    let file = e.target.files[0];
+    if (!!file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const base64String = e.target?.result;
+        insertImage(editor, base64String);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    if (!!ref.current?.value) {
+      ref.current.value = "";
+    }
+  }
+
   return (
     <div className={"flex"}>
       <Button
@@ -132,6 +152,21 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
       >
         Bullet
+      </Button>
+      <input
+        type={"file"}
+        ref={ref as any}
+        accept="image/*"
+        onChange={(event) => fileInputChange(event)}
+        hidden
+      />
+      <Button
+        onclickHandler={() => {
+          if (ref.current) ref.current.click();
+        }}
+        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+      >
+        File
       </Button>
     </div>
   );

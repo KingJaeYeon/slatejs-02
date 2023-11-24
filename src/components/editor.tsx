@@ -48,11 +48,11 @@ function Editor(props: any) {
     <div className={"flex w-full flex-col items-center px-2 py-1"}>
       <Slate editor={editor} initialValue={initialValue}>
         <Toolbar show={true} />
-        <div className={"grid w-full max-w-[45rem]"}>
+        <div className={"grid w-full max-w-[45rem] overflow-auto"}>
           <Title />
           <hr className={"my-5"} />
           <Editable
-            className={"min-h-[80vh] w-full outline-none"}
+            className={"min-h-[60vh] w-full max-w-full outline-none"}
             renderElement={renderElement}
             onKeyDownCapture={(event) => {
               if (event.key === "Enter" && event.shiftKey) {
@@ -70,6 +70,9 @@ function Editor(props: any) {
               }
             }}
           />
+          <div className={"h-[200px] border border-gray-300"}>
+            <p>dmkdmk</p>
+          </div>
         </div>
       </Slate>
     </div>

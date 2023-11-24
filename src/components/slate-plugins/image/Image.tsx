@@ -19,7 +19,7 @@ export const Image = ({ attributes, children, element }: ElementProps) => {
       <div contentEditable={false} className={"relative flex justify-center"}>
         <img
           src={element.url}
-          className={cn("block max-h-[20em] max-w-full", boxShadow)}
+          className={cn("box-border block max-w-[95%]", boxShadow)}
           alt={"insert"}
         />
         <Button
