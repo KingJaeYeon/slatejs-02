@@ -9,13 +9,7 @@ import {
   ListDeleter,
   ShiftEnter,
 } from "@/components/slate-plugins/custom-editor";
-import {
-  BLOCK_PARAGRAPH,
-  BULLETED_LIST,
-  LIST_ITEM,
-  LIST_TYPES,
-  NUMBER_LIST,
-} from "@/components/slate-plugins/constants";
+import { BLOCK_PARAGRAPH } from "@/components/slate-plugins/constants";
 import { Toolbar } from "@/components/toolbar";
 import { Title } from "@/components/title";
 
@@ -56,7 +50,7 @@ function Editor(props: any) {
           <Title />
           <hr className={"my-5"} />
           <Editable
-            className={"w-full outline-none"}
+            className={"min-h-[80vh] w-full outline-none"}
             renderElement={renderElement}
             onKeyDownCapture={(event) => {
               if (event.key === "Enter" && event.shiftKey) {

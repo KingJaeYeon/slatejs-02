@@ -6,9 +6,11 @@ import {
   BULLETED_LIST,
   NUMBER_LIST,
   LIST_ITEM,
+  IMAGE,
 } from "@/components/slate-plugins/constants";
+import { Image } from "@/components/slate-plugins/image/Image";
 
-type ElementProps = {
+export type ElementProps = {
   attributes: any;
   children?: any;
   element: any;
@@ -66,6 +68,12 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
         >
           {children}
         </ol>
+      );
+    case IMAGE:
+      return (
+        <Image element={element} attributes={attributes}>
+          {children}
+        </Image>
       );
     default:
       return (

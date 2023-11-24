@@ -1,7 +1,5 @@
 import {
   Editor as SlateEditor,
-  Editor,
-  Node,
   Element as SlateElement,
   Transforms,
 } from "slate";
@@ -96,7 +94,7 @@ export const ListDeleter = {
 
 export const ListEditor = {
   isListActive(editor: any, format: string) {
-    const [match]: any = Editor.nodes(editor, {
+    const [match]: any = SlateEditor.nodes(editor, {
       match: (n: any) => n.type === format,
     });
     return !!match;
@@ -126,7 +124,7 @@ export const BlockEditor = {
     const { selection } = editor;
     if (!selection) return false;
 
-    const [match]: any = Editor.nodes(editor, {
+    const [match]: any = SlateEditor.nodes(editor, {
       match: (n: any) => SlateElement?.isElement(n) && n[blockType] === format,
     });
     return !!match;
@@ -156,16 +154,16 @@ export const BlockEditor = {
 
 export const MarkEditor = {
   isMarkActive(editor: any, format: MarkFormat) {
-    const marks: Omit<CustomText, "text"> | null = Editor.marks(editor);
+    const marks: Omit<CustomText, "text"> | null = SlateEditor.marks(editor);
     return marks ? (marks as any)[format] === true : false;
   },
 
   toggleMark(editor: any, format: MarkFormat) {
     const isActive = MarkEditor.isMarkActive(editor, format);
     if (isActive) {
-      Editor.removeMark(editor, format);
+      SlateEditor.removeMark(editor, format);
     } else {
-      Editor.addMark(editor, format, true);
+      SlateEditor.addMark(editor, format, true);
     }
   },
 };
