@@ -8,21 +8,21 @@ import {
   HRElement,
   MarkFormat,
   ParagraphElement,
-} from "@/components/slate-plugins/custom-types";
+} from "@/types/custom-types";
 import {
   ALIGN,
-  MARK_CODE,
   BLOCK_PARAGRAPH,
-  MARK_BOLD,
-  MARK_ITALIC,
-  MARK_UNDERLINE,
-  TEXT_ALIGN_TYPES,
-  TYPE,
-  LIST_TYPES,
-  LIST_ITEM,
-  NUMBER_LIST,
   BULLETED_LIST,
   HR,
+  LIST_ITEM,
+  LIST_TYPES,
+  MARK_BOLD,
+  MARK_CODE,
+  MARK_ITALIC,
+  MARK_UNDERLINE,
+  NUMBER_LIST,
+  TEXT_ALIGN_TYPES,
+  TYPE,
 } from "@/components/slate-plugins/constants";
 import {
   MARK_BOLD_HOTKEY,
@@ -60,7 +60,7 @@ export const keydownEventPlugin = (event: any, editor: any) => {
 
 export const ShiftEnter = (event: any, editor: any) => {
   event.preventDefault();
-  editor.insertText("\n");
+  editor.insertText(`\n`);
 };
 
 export const ListDeleter = {
@@ -69,7 +69,7 @@ export const ListDeleter = {
       match: (n: any) => n.type === NUMBER_LIST || n.type === BULLETED_LIST,
     });
     let length;
-    if (!!match) {
+    if (match) {
       length =
         match[0].children[match[0].children.length - 1].children[0].text.length;
     }
@@ -96,10 +96,10 @@ export const ListDeleter = {
 };
 export const HREditor = {
   toggleHR(editor: any) {
-    const hr: HRElement = { type: HR, children: [{ text: "" }] };
+    const hr: HRElement = { type: HR, children: [{ text: `` }] };
     const paragraph: ParagraphElement = {
       type: BLOCK_PARAGRAPH,
-      children: [{ text: "" }],
+      children: [{ text: `` }],
     };
     Transforms.insertNodes(editor, hr);
     Transforms.insertNodes(editor, paragraph);
@@ -166,7 +166,7 @@ export const BlockEditor = {
 
 export const MarkEditor = {
   isMarkActive(editor: any, format: MarkFormat) {
-    const marks: Omit<CustomText, "text"> | null = SlateEditor.marks(editor);
+    const marks: Omit<CustomText, `text`> | null = SlateEditor.marks(editor);
     return marks ? (marks as any)[format] === true : false;
   },
 

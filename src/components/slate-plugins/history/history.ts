@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-expect-error: 무시
 import { isPlainObject } from "is-plain-object";
 import { Operation, Range } from "slate";
 

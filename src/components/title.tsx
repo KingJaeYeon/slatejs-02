@@ -9,13 +9,13 @@ export const Title = (props: any) => {
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   const handleResizeHeight = () => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `auto`;
       textareaRef.current.style.height =
-        textareaRef.current.scrollHeight + "px";
+        textareaRef.current.scrollHeight + `px`;
     }
   };
   const handleKeyDown = (event: any) => {
-    if (event.key === "Enter") {
+    if (event.key === `Enter`) {
       // Enter 키가 눌리면 실행
       event.preventDefault(); // 기본 Enter 키 동작 방지
 
@@ -26,14 +26,14 @@ export const Title = (props: any) => {
   };
 
   return (
-    <div className={"w-full"}>
+    <div className={`w-full`}>
       <textarea
         rows={1}
         ref={textareaRef}
         placeholder="제목"
         maxLength={100}
         className={cn(
-          "flex h-auto w-full resize-none flex-wrap text-[42px] font-bold leading-[52px] outline-none",
+          `flex h-auto w-full resize-none flex-wrap text-[42px] font-bold leading-[52px] outline-none`,
         )}
         tabIndex={0}
         onKeyDown={handleKeyDown}

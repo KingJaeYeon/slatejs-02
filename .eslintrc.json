@@ -1,3 +1,35 @@
 {
-  "extends": "next/core-web-vitals"
+  "parser": "@typescript-eslint/parser", // TypeScript 파일을 위한 ESLint 파서
+  "ignorePatterns": ["*.d.ts"],
+  "parserOptions": {
+    "ecmaVersion": 2020, // 최신 ECMAScript 기능을 활용하기 위한 설정
+    "sourceType": "module", // 모듈 시스템 사용을 위한 설정
+    "ecmaFeatures": {
+      "jsx": true // JSX 사용을 위한 설정 (React 프로젝트인 경우)
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect" // React 버전 자동 감지 (React 프로젝트인 경우)
+    }
+  },
+  "env": {
+    "browser": true, // 브라우저 전역 변수 사용
+    "es6": true, // ES6 전역 변수 사용
+    "node": true // Node.js 전역 변수 사용
+  },
+  "extends": [
+    "eslint:recommended", // ESLint 기본 규칙
+    "plugin:@typescript-eslint/recommended", // TypeScript 규칙
+    "next"
+  ],
+  "plugins": [
+    "@typescript-eslint" // TypeScript 플러그인
+  ],
+  "rules": {
+    // 여기에 프로젝트 특화 규칙을 정의합니다.
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+    "quotes": ["error", "backtick"]
+  }
 }

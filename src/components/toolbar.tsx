@@ -31,8 +31,8 @@ export const Toolbar = ({ show }: { show: boolean }) => {
   if (!show) return null;
 
   function fileInputChange(e: any) {
-    let file = e.target.files[0];
-    if (!!file) {
+    const file = e.target.files[0];
+    if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {
         const base64String = e.target?.result;
@@ -40,31 +40,28 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       };
       reader.readAsDataURL(file);
     }
-
-    // if (!!ref.current?.value) {
-    if ("value" in ref.current) {
-      ref.current.value = "";
+    if (!!ref.current && `value` in ref.current) {
+      ref.current.value = ``;
     }
-    // }
   }
 
   return (
-    <div className={"flex"}>
+    <div className={`flex`}>
       <Button
-        title={"ctrl+b"}
+        title={`ctrl+b`}
         onclickHandler={() => {
           BlockEditor.toggleBlock(editor, BLOCK_PARAGRAPH);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         P
       </Button>
       <Button
-        title={"ctrl+b"}
+        title={`ctrl+b`}
         onclickHandler={() => {
           MarkEditor.toggleMark(editor, MARK_BOLD);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         B
       </Button>
@@ -72,7 +69,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           MarkEditor.toggleMark(editor, MARK_CODE);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         C
       </Button>
@@ -80,7 +77,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           MarkEditor.toggleMark(editor, MARK_UNDERLINE);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         U
       </Button>
@@ -88,7 +85,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           MarkEditor.toggleMark(editor, MARK_ITALIC);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         I
       </Button>
@@ -96,7 +93,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           MarkEditor.toggleMark(editor, MARK_ITALIC);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         Link
       </Button>
@@ -104,7 +101,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           MarkEditor.toggleMark(editor, MARK_LINK);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         H1
       </Button>
@@ -112,7 +109,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           BlockEditor.toggleBlock(editor, BLOCK_HEADING_TWO);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         H2
       </Button>
@@ -120,7 +117,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           BlockEditor.toggleBlock(editor, BLOCK_HEADING_THREE);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         H3
       </Button>
@@ -128,7 +125,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           BlockEditor.toggleBlock(editor, TEXT_ALIGN_LEFT);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         Left
       </Button>
@@ -136,7 +133,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           BlockEditor.toggleBlock(editor, TEXT_ALIGN_CENTER);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         Center
       </Button>
@@ -144,7 +141,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           BlockEditor.toggleBlock(editor, TEXT_ALIGN_RIGHT);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         Right
       </Button>
@@ -152,7 +149,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           ListEditor.toggleList(editor, NUMBER_LIST);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         Number
       </Button>
@@ -160,12 +157,12 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           ListEditor.toggleList(editor, BULLETED_LIST);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         Bullet
       </Button>
       <input
-        type={"file"}
+        type={`file`}
         ref={ref as any}
         accept="image/*"
         onChange={(event) => fileInputChange(event)}
@@ -173,11 +170,11 @@ export const Toolbar = ({ show }: { show: boolean }) => {
       />
       <Button
         onclickHandler={() => {
-          if ("click" in ref.current) {
+          if (!!ref.current && `click` in ref.current) {
             ref.current.click();
           }
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         File
       </Button>
@@ -185,7 +182,7 @@ export const Toolbar = ({ show }: { show: boolean }) => {
         onclickHandler={() => {
           HREditor.toggleHR(editor);
         }}
-        className={"flex border border-gray-300 px-1.5 py-0.5 italic"}
+        className={`flex border border-gray-300 px-1.5 py-0.5 italic`}
       >
         HR
       </Button>

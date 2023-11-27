@@ -29,25 +29,25 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
   switch (element.type) {
     case BLOCK_HEADING_ONE:
       return (
-        <h1 style={style} className={"text-[32px]"} {...attributes}>
+        <h1 style={style} className={`text-[32px]`} {...attributes}>
           <strong>{children}</strong>
         </h1>
       );
     case BLOCK_HEADING_TWO:
       return (
-        <h2 style={style} className={"text-[28px]"} {...attributes}>
+        <h2 style={style} className={`text-[28px]`} {...attributes}>
           <strong>{children}</strong>
         </h2>
       );
     case BLOCK_HEADING_THREE:
       return (
-        <h3 style={style} className={"text-[24px]"} {...attributes}>
+        <h3 style={style} className={`text-[24px]`} {...attributes}>
           <strong>{children}</strong>
         </h3>
       );
     case LIST_ITEM:
       return (
-        <li style={style} className={"mb-2"} {...attributes}>
+        <li style={style} className={`mb-2`} {...attributes}>
           {children}
         </li>
       );
@@ -55,7 +55,7 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
       return (
         <ul
           style={style}
-          className={"mb-2 list-inside list-disc text-[20px]"}
+          className={`mb-2 list-inside list-disc text-[20px]`}
           {...attributes}
         >
           {children}
@@ -65,7 +65,7 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
       return (
         <ol
           style={style}
-          className={"list-inside list-decimal text-[20px]"}
+          className={`list-inside list-decimal text-[20px]`}
           {...attributes}
         >
           {children}
@@ -81,7 +81,7 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
       return <HrElement element={element} attributes={attributes} />;
     default:
       return (
-        <p style={style} className={"text-[20px]"} {...attributes}>
+        <p style={style} className={`text-[20px]`} {...attributes}>
           {children}
         </p>
       );
@@ -102,7 +102,7 @@ export const Leaf = ({ attributes, children, leaf }: LeafProps) => {
   }
   if (leaf.code) {
     children = (
-      <code className={"rounded bg-gray-100 p-0.5 text-[18px] font-thin"}>
+      <code className={`rounded bg-gray-100 p-0.5 text-[18px] font-thin`}>
         {children}
       </code>
     );

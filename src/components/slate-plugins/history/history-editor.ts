@@ -1,33 +1,33 @@
-import { BaseEditor, Editor } from 'slate'
-import { History } from './history'
+import { Editor } from "slate";
+import { History } from "./history";
+import { CustomEditor } from "@/types/custom-types";
 
 /**
  * Weakmaps for attaching state to the editor.
  */
 
-export const HISTORY = new WeakMap<Editor, History>()
-export const SAVING = new WeakMap<Editor, boolean | undefined>()
-export const MERGING = new WeakMap<Editor, boolean | undefined>()
+export const HISTORY = new WeakMap<Editor, History>();
+export const SAVING = new WeakMap<Editor, boolean | undefined>();
+export const MERGING = new WeakMap<Editor, boolean | undefined>();
 
 /**
  * `HistoryEditor` contains helpers for history-enabled editors.
  */
 
-export interface HistoryEditor extends BaseEditor {
-  history: History
-  undo: () => void
-  redo: () => void
-  writeHistory: (stack: 'undos' | 'redos', batch: any) => void
+export interface HistoryEditor extends CustomEditor {
+  history: History;
+  undo: () => void;
+  redo: () => void;
+  writeHistory: (stack: `undos` | `redos`, batch: any) => void;
 }
 
-// eslint-disable-next-line no-redeclare
 export const HistoryEditor = {
   /**
    * Check if a value is a `HistoryEditor` object.
    */
 
   isHistoryEditor(value: any): value is HistoryEditor {
-    return History.isHistory(value.history) && Editor.isEditor(value)
+    return History.isHistory(value.history) && Editor.isEditor(value);
   },
 
   /**
@@ -35,7 +35,7 @@ export const HistoryEditor = {
    */
 
   isMerging(editor: HistoryEditor): boolean | undefined {
-    return MERGING.get(editor)
+    return MERGING.get(editor);
   },
 
   /**
@@ -43,7 +43,7 @@ export const HistoryEditor = {
    */
 
   isSaving(editor: HistoryEditor): boolean | undefined {
-    return SAVING.get(editor)
+    return SAVING.get(editor);
   },
 
   /**
@@ -51,7 +51,7 @@ export const HistoryEditor = {
    */
 
   redo(editor: HistoryEditor): void {
-    editor.redo()
+    editor.redo();
   },
 
   /**
@@ -59,7 +59,7 @@ export const HistoryEditor = {
    */
 
   undo(editor: HistoryEditor): void {
-    editor.undo()
+    editor.undo();
   },
 
   /**
@@ -68,10 +68,10 @@ export const HistoryEditor = {
    */
 
   withoutMerging(editor: HistoryEditor, fn: () => void): void {
-    const prev = HistoryEditor.isMerging(editor)
-    MERGING.set(editor, false)
-    fn()
-    MERGING.set(editor, prev)
+    const prev = HistoryEditor.isMerging(editor);
+    MERGING.set(editor, false);
+    fn();
+    MERGING.set(editor, prev);
   },
 
   /**
@@ -80,9 +80,9 @@ export const HistoryEditor = {
    */
 
   withoutSaving(editor: HistoryEditor, fn: () => void): void {
-    const prev = HistoryEditor.isSaving(editor)
-    SAVING.set(editor, false)
-    fn()
-    SAVING.set(editor, prev)
+    const prev = HistoryEditor.isSaving(editor);
+    SAVING.set(editor, false);
+    fn();
+    SAVING.set(editor, prev);
   },
-}
+};
