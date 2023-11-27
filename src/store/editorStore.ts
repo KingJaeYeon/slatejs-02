@@ -18,7 +18,7 @@ const initialState: State = {
   shift: false,
 };
 
-export const useEditorStore = create<State & Action>()((set, get) => ({
+export const useEditorStore = create<State & Action>()((set) => ({
   editor: withImages(withReact(withHistory(createEditor()))),
   shift: false,
   setShift: (shift: boolean) => set({ shift }),
