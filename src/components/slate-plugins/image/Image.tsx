@@ -10,23 +10,23 @@ export const Image = ({ attributes, children, element }: ElementProps) => {
   const path = ReactEditor.findPath(editor, element);
   const selected = useSelected();
   const focused = useFocused();
-  const boxShadow = selected && focused ? "shadow-[0_0_0_3px_#B4D5FF]" : "none";
-  const display = selected ? "inline" : "hidden";
+  const boxShadow = selected && focused ? `shadow-[0_0_0_3px_#B4D5FF]` : `none`;
+  const display = selected ? `inline` : `hidden`;
 
   return (
     <div {...attributes}>
       {children}
-      <div contentEditable={false} className={"relative flex justify-center"}>
+      <div contentEditable={false} className={`relative flex justify-center`}>
         <img
           src={element.url}
-          className={cn("box-border block max-w-[95%]", boxShadow)}
-          alt={"insert"}
+          className={cn(`box-border block max-w-[95%]`, boxShadow)}
+          alt={`insert`}
         />
         <Button
           // active
           onclickHandler={() => Transforms.removeNodes(editor, { at: path })}
           className={cn(
-            "absolute bottom-0 flex justify-center bg-white",
+            `absolute bottom-0 flex justify-center bg-white`,
             display,
           )}
         >

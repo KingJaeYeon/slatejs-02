@@ -9,7 +9,7 @@ type ButtonProps = {
   onclickHandler?: () => void;
 };
 export const Button = ({
-  className = "",
+  className = ``,
   title,
   children,
   onclickHandler,
@@ -17,7 +17,7 @@ export const Button = ({
   return (
     <button
       title={title}
-      className={cn("", className)}
+      className={cn(``, className)}
       onClick={onclickHandler}
     >
       {children}

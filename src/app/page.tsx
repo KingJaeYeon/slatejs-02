@@ -1,6 +1,4 @@
-import Image from "next/image";
-
-export default function Home() {
+export default async function Home() {
   return (
     <>
       <a href="/test">test</a>

@@ -1,10 +1,10 @@
 import {
-  Descendant,
   BaseEditor,
   BaseRange,
-  Range,
+  Descendant,
   Element,
   Operation,
+  Range,
 } from "slate";
 import { ReactEditor } from "slate-react";
 import { HistoryEditor } from "slate-history";
@@ -19,21 +19,21 @@ import {
   BUTTON,
   CODE_LINE,
   EDITABLE_VOID,
+  HR,
   IMAGE,
   LIST_ITEM,
   MARK_BOLD,
+  MARK_CODE,
   MARK_ITALIC,
+  MARK_LINK,
   MARK_UNDERLINE,
   MENTION,
+  NUMBER_LIST,
   TABLE,
   TABLE_CELL,
   TABLE_ROW,
   TITLE,
   VIDEO,
-  MARK_CODE,
-  NUMBER_LIST,
-  HR,
-  MARK_LINK,
 } from "@/components/slate-plugins/constants";
 
 export type BlockQuoteElement = {
@@ -202,7 +202,7 @@ export interface HistoryEditor extends BaseEditor {
   history: History;
   undo: () => void;
   redo: () => void;
-  writeHistory: (stack: "undos" | "redos", batch: any) => void;
+  writeHistory: (stack: `undos` | `redos`, batch: any) => void;
 }
 
 export interface History {
