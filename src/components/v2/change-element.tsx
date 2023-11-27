@@ -9,7 +9,7 @@ import {
   IMAGE,
   HR,
 } from "@/components/slate-plugins/constants";
-import { Image } from "@/components/slate-plugins/image/Image";
+import { ImageElement } from "@/components/slate-plugins/image/Image";
 import { HrElement } from "@/components/slate-plugins/hr/Hr";
 
 export type ElementProps = {
@@ -73,9 +73,9 @@ export const Element = ({ attributes, children, element }: ElementProps) => {
       );
     case IMAGE:
       return (
-        <Image element={element} attributes={attributes}>
+        <ImageElement element={element} attributes={attributes}>
           {children}
-        </Image>
+        </ImageElement>
       );
     case HR:
       return <HrElement element={element} attributes={attributes} />;

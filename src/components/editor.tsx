@@ -61,8 +61,7 @@ function Editor() {
             }}
             renderLeaf={renderLeaf}
             onKeyDown={(event) => {
-              if (event.key === `Enter` && event.shiftKey) {
-              } else {
+              if (!(event.key === `Enter` && event.shiftKey)) {
                 keydownEventPlugin(event, editor);
               }
             }}

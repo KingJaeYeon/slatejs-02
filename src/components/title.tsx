@@ -4,7 +4,7 @@ import { ReactEditor } from "slate-react";
 import { useEditorStore } from "@/store/editorStore";
 import { cn } from "@/lib/utils";
 
-export const Title = (props: any) => {
+export const Title = () => {
   const { editor } = useEditorStore((state) => state);
   const textareaRef = React.useRef<HTMLTextAreaElement>(null);
   const handleResizeHeight = () => {

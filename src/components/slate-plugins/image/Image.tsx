@@ -4,8 +4,13 @@ import { cn } from "@/lib/utils";
 import { Transforms } from "slate";
 import { Button } from "@/components/button";
 import { useEditorStore } from "@/store/editorStore";
+import Image from "next/image";
 
-export const Image = ({ attributes, children, element }: ElementProps) => {
+export const ImageElement = ({
+  attributes,
+  children,
+  element,
+}: ElementProps) => {
   const { editor } = useEditorStore((state) => state);
   const path = ReactEditor.findPath(editor, element);
   const selected = useSelected();
@@ -17,8 +22,8 @@ export const Image = ({ attributes, children, element }: ElementProps) => {
     <div {...attributes}>
       {children}
       <div contentEditable={false} className={`relative flex justify-center`}>
-        <img
-          src={element.url}
+        <Image
+          src={element.url as string}
           className={cn(`box-border block max-w-[95%]`, boxShadow)}
           alt={`insert`}
         />
